@@ -1,14 +1,13 @@
 #include <iostream>
+#include <thread>
 #include <span>
 #include "SockStream.h"
 
 #define ENABLE_GET_HTTP
 #include "http.h"
 #undef ENABLE_GET_HTTP
-
 #include "sha1/sha1.hpp"
 #include "base64.h"
-
 #include "Websocket.h"
 
 #include "leet.h"
@@ -24,7 +23,7 @@ int main() {
     while(true) {
         ClientConnection cl = server.Accept();
         std::cout << "Client connected" << std::endl;
-        foo(std::move(cl));
+        std::thread(foo, std::move(cl)).detach();
     }
 }
 

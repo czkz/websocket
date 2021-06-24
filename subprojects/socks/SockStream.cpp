@@ -23,7 +23,7 @@ void SockConnection::Send(const void* data, int dataSize) const {
 }
 
 
-void SockConnection::ReceiveInto(void* buffer, size_t bufferLength) {
+void SockConnection::ReceiveInto(void* buffer, size_t bufferLength) const {
     for (size_t i = 0; i < bufferLength; ) {
         int res = receiveBase((char*) buffer + i, bufferLength - i, true);
         i += res;

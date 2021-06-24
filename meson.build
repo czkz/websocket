@@ -11,5 +11,12 @@ executable('websock',
            'Websocket.cpp',
            'sha1/sha1.cpp',
            'main.cpp',
-           dependencies : [ libsocks_dep ],
+           dependencies : [ libsocks_dep, dependency('threads') ],
+           install : true)
+
+executable('websock2',
+           'Websocket.cpp',
+           'sha1/sha1.cpp',
+           'main2.cpp',
+           dependencies : [ libsocks_dep, dependency('threads') ],
            install : true)
