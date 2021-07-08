@@ -48,7 +48,7 @@ WSPacket WebsocketConnection::Receive() const {
         data[i] ^= masking_key[i % 4];
     }
     //To prevent stack overflow exploits, tcp doesn't use that anyway
-    if (0 || fin == false) {
+    if (false && fin == false) {
         ///TODO test
         std::cout << "WebsocketConnection::Receive() recursing" << std::endl;
         WSPacket next = Receive();
