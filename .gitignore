@@ -1,3 +1,7 @@
 .*.swp
 build/
 build-win/
+
+/subprojects/*
+!/subprojects/*.wrap
+!/subprojects/packagefiles/

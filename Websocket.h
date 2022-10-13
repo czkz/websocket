@@ -18,11 +18,11 @@ public:
     WebsocketConnection(SockConnection&& s, bool isServer) : SockConnection(std::move(s)), isServer(isServer) { }
     WebsocketConnection(const SockConnection& s, bool isServer) = delete;
 
-    WSPacket Receive() const;
+    WSPacket Receive();
     ///singleSend true: data copied, sent in one call
     ///singleSend false: data not copied, send() called twice
-    void Send(std::string_view data, uint8_t opcode = WSPacket::text, std::optional<bool> singleSend = std::nullopt) const;
-    void Send(const WSPacket& packet, std::optional<bool> singleSend = std::nullopt) const {
+    void Send(std::string_view data, uint8_t opcode = WSPacket::text, std::optional<bool> singleSend = std::nullopt);
+    void Send(const WSPacket& packet, std::optional<bool> singleSend = std::nullopt) {
         return Send(packet.data, packet.opcode, singleSend);
     }
 

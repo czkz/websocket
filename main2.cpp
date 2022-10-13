@@ -25,7 +25,7 @@ void onReceived(std::string data, set_it who) {
     for (auto it = clients.begin(); it != clients.end(); ++it) {
         if (it == who) { continue; }
         try {
-            it->Send(data);
+            const_cast<WebsocketConnection&>(*it).Send(data);
         } catch (const SockError& err) {
             std::cout << err.what() << std::endl;
         }
@@ -70,7 +70,7 @@ void clientThreadFunc(SockConnection&& cl) {
         // }
         //Main loop
         while(true) {
-            WSPacket p = it->Receive();
+            WSPacket p = const_cast<WebsocketConnection&>(*it).Receive();
             std::cout << "Received " << p.data.size() << " bytes" << std::endl;
             if (p.opcode == p.connection_close) {
                 std::cout << "Received connection_close" << std::endl;

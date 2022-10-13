@@ -13,7 +13,7 @@ static void swapEndian(T& val) {
 }
 
 ///TODO handle opcode
-WSPacket WebsocketConnection::Receive() const {
+WSPacket WebsocketConnection::Receive() {
     std::string s = SockConnection::ReceiveFill(2);
     bool    fin         = s[0] & 0b10000000;
     // bool    rsv1        = s[0] & 0b01000000;
@@ -107,7 +107,7 @@ static std::string WSMakeHeader(const wsFlags& flags, size_t len) {
     return header;
 }
 
-void WebsocketConnection::Send(std::string_view data, uint8_t opcode, std::optional<bool> singleSend) const {
+void WebsocketConnection::Send(std::string_view data, uint8_t opcode, std::optional<bool> singleSend) {
 
     std::string header = WSMakeHeader({1, 0, 0, 0, opcode, !isServer,
                                           {   ///FIXME
